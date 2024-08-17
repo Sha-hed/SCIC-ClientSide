@@ -23,12 +23,10 @@ const Home = () => {
     const maxRef = useRef();
 
 
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['product', firstPage, value, date, t, brand, cat, minPrice, maxPrice],
         queryFn: async () => {
             const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/allWork?page=${firstPage}&value=${value}&date=${date}&text=${t}&brand=${brand}&category=${cat}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
-            console.log('Data from Main Function', data);
-            console.log('Koyta aches Matching Product ', data.productsLength)
             setProducts(data.products);
             setTProduct(data.productsLength)
         }
@@ -42,9 +40,6 @@ const Home = () => {
         setMinPrice(minRef.current.value)
         setMaxPrice(maxRef.current.value)
         setT('');
-        console.log(brand, cat, minPrice, maxPrice);
-        // const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/category?brand=${brand}&category=${cat}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
-        // setProducts(data)
     }
 
     // Sort Functionality :
@@ -58,16 +53,12 @@ const Home = () => {
     const handleName = async () => {
         setFirstPage(0);
         setT(searchRef.current.value)
-        // const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/searchName?text=${t}`)
-        // console.log("By Name : ", data);
-        // setProducts(data);
+
     }
-    console.log("Total Product ", tProduct)
     //Pagination Concept :
     const loadCount = async () => {
         const { data } = await axios.get('https://scic-job-task-server-side-beta.vercel.app/countDocument')
         setTProduct(data.totalDocuments)
-        // console.log('Data Count ', data);
     }
     useEffect(() => {
         loadCount();
@@ -89,9 +80,9 @@ const Home = () => {
         }
     }
 
-    if (isLoading) {
-        return <Pending></Pending>
-    }
+    // if (isLoading) {
+    //     return <Pending></Pending>
+    // }
     return (
         <>
             <div className="max-w-7xl mx-auto my-10 min-h-screen">

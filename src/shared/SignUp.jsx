@@ -25,10 +25,11 @@ const SignUp = () => {
                     draggable: true,
                     progress: undefined,
                 });
-                console.log(result)
                 navigate('/')
             })
-            .catch((error) => console.log(error.message))
+            .catch((error) => {
+
+            })
     }
 
     return (

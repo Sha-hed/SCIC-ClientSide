@@ -2,14 +2,18 @@ import { useContext } from "react";
 import { AuthContext } from "../route/AuthProvider";
 import { Link } from "react-router-dom";
 import profile from '../assets/images/boy.png';
-
+import shopLogo from '../assets/images/ShopLogo.png'
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
-            .then((result) => console.log('From Logout ', result))
-            .catch((error) => console.log('From Logout ', error.message))
+            .then((result) => {
+
+            })
+            .catch((error) => {
+
+            })
     }
 
     return (
@@ -44,7 +48,12 @@ const Navbar = () => {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">SuperShop</a>
+                <div className="avatar">
+                    <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
+                        <img src={shopLogo} />
+                    </div>
+                </div>
+                <a className="btn btn-ghost text-xl font-bold gap-0">Super<span className="text-white">Shop</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 {/* <ul className="menu menu-horizontal px-1">

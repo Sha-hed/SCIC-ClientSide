@@ -14,19 +14,22 @@ const Login = () => {
         const password = e.target.password.value;
         signIn(email, password)
             .then((result) => {
-                console.log(result)
                 navigate('/')
             })
-            .catch((error) => console.log(error.message))
+            .catch((error)=>{
+
+            })
     }
 
     const handleGoogle = () => {
         GoogleLogin()
             .then((result) => {
-                console.log('From Google Sign In ', result)
+                
                 navigate('/')
             })
-            .catch((error) => console.log('From Google Sign IN ', error.message))
+            .catch((error) =>{
+                
+            })
     }
 
 
