@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../../components/ProductCard";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Pending from "../Pending";
-
 
 const Home = () => {
     const [firstPage, setFirstPage] = useState(0);
@@ -103,11 +101,11 @@ const Home = () => {
                         </details>
                     </div>
                 </div>
-                <div className="flex justify-between gap-10 mb-10 border-2 py-5 px-2 rounded-2xl h-[150px] border-rose-400">
+                <div className="flex flex-col lg:flex-row justify-between gap-10 mb-10 border-2 py-10 px-2 rounded-2xl border-rose-400 mx-1 lg:mx-0">
                     {/* This JSON data is now simplified with only 5 brands (TechEase, SoundPro, HomeSmart, PhotoGear, FindIt) and 5 categories (Electronics, Audio, Home, Accessories, Personal Care).  */}
-                    <div className="w-[250px] text-center">
+                    <div className="w-full md:w-[250px] text-center">
                         <h1 className="font-bold">Brand Name</h1>
-                        <select ref={brandRef} onChange={(e) => setBrand(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-[250px] outline-none" name="" id="">
+                        <select ref={brandRef} onChange={(e) => setBrand(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-full md:w-[250px] outline-none" name="" id="">
                             <option value="">Select a Brand</option>
                             <option className="font-bold" value="TechEase">TechEase</option>
                             <option className="font-bold" value="SoundPro">SoundPro</option>
@@ -116,9 +114,9 @@ const Home = () => {
                             <option className="font-bold" value="FindIt">FindIt</option>
                         </select>
                     </div>
-                    <div className="w-[250px] text-center">
+                    <div className="w-full md:w-[250px] text-center">
                         <h1 className="font-bold">Categories</h1>
-                        <select ref={catRef} onChange={(e) => setCat(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-[250px] outline-none" name="" id="">
+                        <select ref={catRef} onChange={(e) => setCat(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-full md:w-[250px]        outline-none" name="" id="">
                             <option value="">Select a Category</option>
                             <option className="font-bold" value="Electronics">Electronics</option>
                             <option className="font-bold" value="Audio">Audio</option>
@@ -133,11 +131,13 @@ const Home = () => {
                         <label htmlFor="">to</label>
                         <input ref={maxRef} onChange={(e) => setMaxPrice(e.target.value)} className="border-2 outline-none p-2 rounded-xl ml-2" placeholder="MAX PRICE" type="text" name="maxPrice" id="" />
                     </div>
-                    <button onClick={category} className="mt-6 p-1 border h-[50px] w-[150px] rounded-xl font-bold bg-rose-400 text-white">Filter Search</button>
+                    <div className="flex justify-center items-center ">
+                        <button onClick={category} className="mt-6 p-1 border h-[50px] w-[150px] rounded-xl font-bold bg-rose-400 text-white">Filter Search</button>
+                    </div>
                 </div>
                 <div>
                     {
-                        products.length > 0 ? (<div className="grid grid-cols-3 gap-6">
+                        products.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-3">
                             {
                                 products?.map((product, id) => <ProductCard key={id} product={product}></ProductCard>)
                             }
@@ -147,7 +147,7 @@ const Home = () => {
 
                 <div>
                     {
-                        products.length > 0 && (<div className="flex justify-center gap-5 my-10">
+                        products.length > 0 && (<div className="flex flex-wrap justify-center gap-5 my-10">
                             <button onClick={handlePrev} className="p-3 rounded border hover:bg-red-300 hover:text-white font-bold">Prev</button>
                             {
                                 pages?.map((page) =>
