@@ -103,7 +103,7 @@ const Home = () => {
                 </div>
                 <div className="flex flex-col lg:flex-row justify-between gap-10 mb-10 border-2 py-10 px-2 rounded-2xl border-rose-400 mx-1 lg:mx-0">
                     {/* This JSON data is now simplified with only 5 brands (TechEase, SoundPro, HomeSmart, PhotoGear, FindIt) and 5 categories (Electronics, Audio, Home, Accessories, Personal Care).  */}
-                    <div className="w-full md:w-[250px] text-center">
+                    <div className="w-3/4 mx-auto md:w-[250px] text-center">
                         <h1 className="font-bold">Brand Name</h1>
                         <select ref={brandRef} onChange={(e) => setBrand(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-full md:w-[250px] outline-none" name="" id="">
                             <option value="">Select a Brand</option>
@@ -114,7 +114,7 @@ const Home = () => {
                             <option className="font-bold" value="FindIt">FindIt</option>
                         </select>
                     </div>
-                    <div className="w-full md:w-[250px] text-center">
+                    <div className="w-3/4 mx-auto md:w-[250px] text-center">
                         <h1 className="font-bold">Categories</h1>
                         <select ref={catRef} onChange={(e) => setCat(e.target.value)} className="border-2 p-2 rounded-xl my-2 w-full md:w-[250px]        outline-none" name="" id="">
                             <option value="">Select a Category</option>
@@ -127,9 +127,11 @@ const Home = () => {
                     </div>
                     <div className="text-center">
                         <h1 className="font-bold mb-2">Price Range</h1>
-                        <input ref={minRef} onChange={(e) => setMinPrice(e.target.value)} className="border-2 outline-none p-2 rounded-xl mr-2" placeholder="MIN PRICE" type="text" name="minPrice" id="" />
-                        <label htmlFor="">to</label>
-                        <input ref={maxRef} onChange={(e) => setMaxPrice(e.target.value)} className="border-2 outline-none p-2 rounded-xl ml-2" placeholder="MAX PRICE" type="text" name="maxPrice" id="" />
+                        <div className="flex justify-center items-center">
+                            <input ref={minRef} onChange={(e) => setMinPrice(e.target.value)} className="min-w-2 border-2 outline-none p-2 rounded-xl mr-2" placeholder="MIN PRICE" type="text" name="minPrice" id="" />
+                            <label className="font-bold">To</label>
+                            <input ref={maxRef} onChange={(e) => setMaxPrice(e.target.value)} className="min-w-2 border-2 outline-none p-2 rounded-xl ml-2" placeholder="MAX PRICE" type="text" name="maxPrice" id="" />
+                        </div>
                     </div>
                     <div className="flex justify-center items-center ">
                         <button onClick={category} className="mt-6 p-1 border h-[50px] w-[150px] rounded-xl font-bold bg-rose-400 text-white">Filter Search</button>

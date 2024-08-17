@@ -40,7 +40,7 @@ const Login = () => {
                     <div className="text-center">
                         <h1 className="text-5xl font-bold">Login now!</h1>
                     </div>
-                    <div className="w-[400px] h-[400px] p-5 bg-base-100 shrink-0 shadow-2xl rounded-xl">
+                    <div className="w-full md:w-[400px] h-[400px] p-5 bg-base-100 shrink-0 shadow-2xl rounded-xl">
                         <form onSubmit={handleSubmit} className="">
                             <div className="form-control">
                                 <label className="label">
