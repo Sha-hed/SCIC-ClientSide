@@ -6,13 +6,13 @@ const Form = () => {
     const [products, setProducts] = useState([]);
     const [t, setT] = useState('');
     const handlePrice = async (p) => {
-        const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/sortByLowToHigh?value=${p}`)
+        const { data } = await axios.get(`http://localhost:5000/sortByLowToHigh?value=${p}`)
         setProducts(data);
     }
 
     //Search By Name :
     const handleName = async () => {
-        const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/searchName?text=${t}`)
+        const { data } = await axios.get(`http://localhost:5000/searchName?text=${t}`)
         setProducts(data);
     }
     return (

@@ -1,23 +1,44 @@
 import { useContext } from "react";
 import { AuthContext } from "../route/AuthProvider";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import profile from '../assets/images/boy.png';
 import shopLogo from '../assets/images/ShopLogo.png'
+import TechLogo from '../assets/images/TechLogo.png'
+import { IoSearch } from "react-icons/io5";
+import { useEffect, useRef, useState } from 'react';
+import IsAdmin from "../hooks/IsAdmin";
 const Navbar = () => {
 
-    const { user, logOut } = useContext(AuthContext);
+
+    const [isAdmin] = IsAdmin();
+    const [searchText, setSearchText] = useState('')
+    const navigate = useNavigate()
+
+    const searchRef = useRef()
+
+    console.log('Admin Check ', isAdmin)
+    const { user, logOut } = useContext(AuthContext); 0
     const handleLogOut = () => {
         logOut()
-            .then((result) => {
-
+            .then(() => {
+                setOpen(!open)
             })
-            .catch((error) => {
+            .catch(() => {
 
             })
     }
+    const [open, setOpen] = useState(false);
+
+    const handleSearchFeature = (event) => {
+        let searched = searchRef.current.value
+        navigate('/searchProduct',{state:{searched}})
+
+        console.log('Search Value :', searchRef.current.value)
+        // console.log(searchText)
+    }
 
     return (
-        <div className="navbar bg-rose-400 px-1 lg:px-32">
+        <div className="navbar px-1 lg:px-32 shadow-xl py-3">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -43,10 +64,10 @@ const Navbar = () => {
                 </div>
                 <div className="avatar">
                     <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
-                        <img src={shopLogo} />
+                        <img src={TechLogo} />
                     </div>
                 </div>
-                <a className="btn btn-ghost text-xl font-bold gap-0">Super<span className="text-white">Shop</span></a>
+                <a className="btn btn-ghost text-xl font-bold gap-0 uppercase">Tech<span className="text-blue-900">Shop</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 {/* <ul className="menu menu-horizontal px-1">
@@ -62,17 +83,30 @@ const Navbar = () => {
                     </li>
                     <li><a>Item 3</a></li>
                 </ul> */}
+                <div className="flex">
+                    <input ref={searchRef} className="border border-gray-300 w-[350px] p-4 rounded-l-full outline-none" type="text" name="search" id="" placeholder="Search by product name" />
+                    <button onClick={handleSearchFeature} className="bg-[#247cc6] text-white font-bold px-10 rounded-r-full"><IoSearch className="text-3xl" /></button>
+                </div>
             </div>
             <div className="navbar-end">
                 {
-                    user ? <div className="flex space-x-4">
+                    user ? <div className="relative flex space-x-4">
                         <div className="avatar">
                             <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
-                                <img src={profile} />
+                                <img onClick={() => setOpen(!open)} src={profile} />
                             </div>
                         </div>
-                        <button onClick={handleLogOut} className="btn">Sign Out</button>
-                    </div> : <Link to={`/login`} className="btn">Sign In</Link>
+                        {
+                            isAdmin ? (<div className={`${open ? 'visible' : 'invisible'} absolute top-12 -left-32 bg-white w-[150px] p-3 rounded shadow-xl border border-black`}>
+                                <Link to={'/addProduct'} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Dashboard</Link>
+                                <li onClick={handleLogOut} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Logout</li>
+                            </div>) : (<div className={`${open ? 'visible' : 'invisible'} absolute top-12 -left-32 bg-white w-[150px] p-3 rounded shadow-xl border border-black`}>
+                                <li className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Cart</li>
+                                <li onClick={handleLogOut} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Logout</li>
+                            </div>)
+                        }
+                        {/* <button onClick={handleLogOut} className="p-2 bg-[#247cc6] px-5 text-white font-bold rounded">Sign Out</button> */}
+                    </div> : <Link to={`/login`} className="p-2 bg-[#247cc6] px-5 text-white font-bold rounded">Login</Link>
                 }
             </div>
         </div>
@@ -80,3 +114,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

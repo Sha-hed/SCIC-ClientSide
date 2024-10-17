@@ -24,7 +24,7 @@ const Home = () => {
     const { data } = useQuery({
         queryKey: ['product', firstPage, value, date, t, brand, cat, minPrice, maxPrice],
         queryFn: async () => {
-            const { data } = await axios.get(`https://scic-job-task-server-side-beta.vercel.app/allWork?page=${firstPage}&value=${value}&date=${date}&text=${t}&brand=${brand}&category=${cat}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
+            const { data } = await axios.get(`http://localhost:5000/allWork?page=${firstPage}&value=${value}&date=${date}&text=${t}&brand=${brand}&category=${cat}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
             setProducts(data.products);
             setTProduct(data.productsLength)
         }
@@ -55,7 +55,7 @@ const Home = () => {
     }
     //Pagination Concept :
     const loadCount = async () => {
-        const { data } = await axios.get('https://scic-job-task-server-side-beta.vercel.app/countDocument')
+        const { data } = await axios.get('http://localhost:5000/countDocument')
         setTProduct(data.totalDocuments)
     }
     useEffect(() => {
