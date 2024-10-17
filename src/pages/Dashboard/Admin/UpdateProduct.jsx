@@ -1,9 +1,14 @@
+import { useLoaderData, useNavigate } from "react-router-dom";
+import useAxiosGeneral from "../../../hooks/useAxiosGeneral";
+import toast from "react-hot-toast";
 
-import toast from 'react-hot-toast';
-import useAxiosGeneral from '../../hooks/useAxiosGeneral'
-const AddProduct = () => {
 
+const UpdateProduct = () => {
+
+    const product = useLoaderData()
+    const { _id, productName, productPrice, productCategory, productQuantity, productImage, productDetails } = product
     const axiosGeneral = useAxiosGeneral()
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault()
         const productName = e.target.productName.value
@@ -13,33 +18,34 @@ const AddProduct = () => {
         const productImage = e.target.productImage.value
         const productDetails = e.target.productDetails.value
         const product = { productName, productPrice, productCategory, productQuantity, productImage, productDetails }
-        const { data } = await axiosGeneral.post('/addProduct', product)
+        const { data } = await axiosGeneral.patch(`/updateProduct/${_id}`, product)
         console.log(data)
-        if (data.insertedId) {
-            toast.success('Product inserted Successfully')
+        if (data.modifiedCount) {
+            toast.success('Product updated Successfully')
+            setTimeout(() => {
+                navigate('/dashboard/viewAll')
+            }, 2000)
         }
-        console.log('Product Paisot :', product)
-        e.target.reset()
     }
     return (
         <div>
-            <h1 className="text-center font-bold underline text-xl mb-4">Add Product</h1>
+            <h1 className="text-center font-bold underline text-xl mb-4">Update Product</h1>
             <div className="w-[800px] p-5 mx-auto shadow-xl border">
                 <form onSubmit={handleSubmit}>
                     <div className="flex gap-5 w-full">
                         <div className="flex flex-col gap-2 w-1/2">
                             <label className="font-semibold" htmlFor="">ProductName</label>
-                            <input className="p-3 bg-gray-100 border border" placeholder="Product Name" type="text" name="productName" id="" />
+                            <input defaultValue={productName} className="p-3 bg-gray-100 border border" placeholder="Product Name" type="text" name="productName" id="" />
                         </div>
                         <div className="flex flex-col gap-2 w-1/2">
                             <label className="font-semibold" htmlFor="">ProductPrice</label>
-                            <input className="p-3 bg-gray-100 border" placeholder="Product Price" type="number" name="productPrice" id="" />
+                            <input defaultValue={productPrice} className="p-3 bg-gray-100 border" placeholder="Product Price" type="number" name="productPrice" id="" />
                         </div>
                     </div>
                     <div className="flex gap-5 w-full">
                         <div className="flex flex-col w-1/2 gap-2">
                             <label className="font-semibold" htmlFor="">Category</label>
-                            <select className="p-3 bg-gray-100 border" name="category" id="">
+                            <select defaultValue={productCategory} className="p-3 bg-gray-100 border" name="category" id="">
                                 <option value="">Select a category</option>
                                 <option value="Accessories">Accessories </option>
                                 <option value="Basic Component">Basic Component </option>
@@ -57,21 +63,21 @@ const AddProduct = () => {
                         </div>
                         <div className="flex flex-col w-1/2 gap-2">
                             <label className="font-semibold" htmlFor="">Product Quantity</label>
-                            <input className="p-3 bg-gray-100 border" placeholder="Product Quantity" type="number" name="productQuantity" id="" />
+                            <input defaultValue={productQuantity} className="p-3 bg-gray-100 border" placeholder="Product Quantity" type="number" name="productQuantity" id="" />
                         </div>
                     </div>
                     <div className="flex gap-5 w-full">
                         <div className="flex flex-col w-1/2 gap-2">
                             <label className="font-semibold" htmlFor="">Product Image</label>
-                            <input className="p-3 bg-gray-100 border" placeholder="Product image URL" type="text" name="productImage" id="" />
+                            <input defaultValue={productImage} className="p-3 bg-gray-100 border" placeholder="Product image URL" type="text" name="productImage" id="" />
                         </div>
                     </div>
                     <div className="flex flex-col w-full gap-2">
                         <label className="font-semibold" htmlFor="">Product Details</label>
-                        <textarea rows={3} className="p-3 bg-gray-100 border" name="productDetails" id="" placeholder="productDetails"></textarea>
+                        <textarea defaultValue={productDetails} rows={3} className="p-3 bg-gray-100 border" name="productDetails" id="" placeholder="productDetails"></textarea>
                     </div>
                     <div className="flex justify-center">
-                        <button className="mt-3 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">Add Product</button>
+                        <button className="mt-3 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" type="submit">Update Product</button>
                     </div>
                 </form>
             </div>
@@ -79,4 +85,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default UpdateProduct;

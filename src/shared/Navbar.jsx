@@ -7,6 +7,7 @@ import TechLogo from '../assets/images/TechLogo.png'
 import { IoSearch } from "react-icons/io5";
 import { useEffect, useRef, useState } from 'react';
 import IsAdmin from "../hooks/IsAdmin";
+import { FaCartArrowDown } from "react-icons/fa";
 const Navbar = () => {
 
 
@@ -17,7 +18,7 @@ const Navbar = () => {
     const searchRef = useRef()
 
     console.log('Admin Check ', isAdmin)
-    const { user, logOut } = useContext(AuthContext); 0
+    const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
             .then(() => {
@@ -31,7 +32,7 @@ const Navbar = () => {
 
     const handleSearchFeature = (event) => {
         let searched = searchRef.current.value
-        navigate('/searchProduct',{state:{searched}})
+        navigate('/searchProduct', { state: { searched } })
 
         console.log('Search Value :', searchRef.current.value)
         // console.log(searchText)
@@ -90,6 +91,9 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {
+                    user && !isAdmin && <Link to={`/cartProduct/${user?.email}`}><FaCartArrowDown className="text-4xl mr-10" /></Link>
+                }
+                {
                     user ? <div className="relative flex space-x-4">
                         <div className="avatar">
                             <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
@@ -98,10 +102,10 @@ const Navbar = () => {
                         </div>
                         {
                             isAdmin ? (<div className={`${open ? 'visible' : 'invisible'} absolute top-12 -left-32 bg-white w-[150px] p-3 rounded shadow-xl border border-black`}>
-                                <Link to={'/addProduct'} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Dashboard</Link>
+                                <Link to={'/dashboard'} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Dashboard</Link>
                                 <li onClick={handleLogOut} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Logout</li>
                             </div>) : (<div className={`${open ? 'visible' : 'invisible'} absolute top-12 -left-32 bg-white w-[150px] p-3 rounded shadow-xl border border-black`}>
-                                <li className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Cart</li>
+                                {/* <li className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Cart</li> */}
                                 <li onClick={handleLogOut} className="list-none cursor-pointer hover:bg-gray-300 hover:px-2 font-semibold">Logout</li>
                             </div>)
                         }

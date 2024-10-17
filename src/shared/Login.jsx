@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../route/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosGeneral from "../hooks/useAxiosGeneral";
 
 
@@ -9,6 +9,8 @@ const Login = () => {
     const navigate = useNavigate();
     const { signIn, GoogleLogin } = useContext(AuthContext);
     const axiosGeneral = useAxiosGeneral()
+    const location = useLocation();
+    const page = location?.state?.from || '/'
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +19,7 @@ const Login = () => {
         console.log(email, password)
         signIn(email, password)
             .then((result) => {
-                navigate('/')
+                navigate(page)
                 console.log(result)
             })
             .catch((error) => {
@@ -35,7 +37,7 @@ const Login = () => {
                 const user = { name, email, password, role }
                 const { data } = await axiosGeneral.post('/users', user)
                 console.log(result,data)
-                navigate('/')
+                navigate(page)
             })
             .catch((error) => {
                 console.log(error)
