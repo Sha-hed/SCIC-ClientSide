@@ -19,7 +19,7 @@ const UpdateProduct = () => {
         const productDetails = e.target.productDetails.value
         const product = { productName, productPrice, productCategory, productQuantity, productImage, productDetails }
         const { data } = await axiosGeneral.patch(`/updateProduct/${_id}`, product)
-        console.log(data)
+        // console.log(data)
         if (data.modifiedCount) {
             toast.success('Product updated Successfully')
             setTimeout(() => {

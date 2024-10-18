@@ -16,14 +16,14 @@ const Login = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password)
+        // console.log(email, password)
         signIn(email, password)
             .then((result) => {
                 navigate(page)
-                console.log(result)
+                // console.log(result)
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
     }
 
@@ -36,11 +36,11 @@ const Login = () => {
                 const role = 'user'
                 const user = { name, email, password, role }
                 const { data } = await axiosGeneral.post('/users', user)
-                console.log(result,data)
+                // console.log(result,data)
                 navigate(page)
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
     }
 

@@ -9,16 +9,16 @@ const AddProduct = () => {
         const productName = e.target.productName.value
         const productPrice = parseInt(e.target.productPrice.value)
         const productCategory = e.target.category.value
-        const productQuantity = e.target.productQuantity.value
+        // const productQuantity = e.target.productQuantity.value
         const productImage = e.target.productImage.value
         const productDetails = e.target.productDetails.value
-        const product = { productName, productPrice, productCategory, productQuantity, productImage, productDetails }
+        const product = { productName, productPrice, productCategory, productImage, productDetails }
         const { data } = await axiosGeneral.post('/addProduct', product)
-        console.log(data)
+        // console.log(data)
         if (data.insertedId) {
             toast.success('Product inserted Successfully')
         }
-        console.log('Product Paisot :', product)
+        // console.log('Product Paisot :', product)
         e.target.reset()
     }
     return (
@@ -26,7 +26,7 @@ const AddProduct = () => {
             <h1 className="text-center font-bold underline text-xl mb-4">Add Product</h1>
             <div className="w-[800px] p-5 mx-auto shadow-xl border">
                 <form onSubmit={handleSubmit}>
-                    <div className="flex gap-5 w-full">
+                    <div className="flex gap-5 w-full mb-5">
                         <div className="flex flex-col gap-2 w-1/2">
                             <label className="font-semibold" htmlFor="">ProductName</label>
                             <input className="p-3 bg-gray-100 border border" placeholder="Product Name" type="text" name="productName" id="" />
@@ -36,7 +36,7 @@ const AddProduct = () => {
                             <input className="p-3 bg-gray-100 border" placeholder="Product Price" type="number" name="productPrice" id="" />
                         </div>
                     </div>
-                    <div className="flex gap-5 w-full">
+                    <div className="flex gap-5 w-full mb-5">
                         <div className="flex flex-col w-1/2 gap-2">
                             <label className="font-semibold" htmlFor="">Category</label>
                             <select className="p-3 bg-gray-100 border" name="category" id="">
@@ -55,12 +55,6 @@ const AddProduct = () => {
                                 <option value="Wireless">Wireless </option>
                             </select>
                         </div>
-                        <div className="flex flex-col w-1/2 gap-2">
-                            <label className="font-semibold" htmlFor="">Product Quantity</label>
-                            <input className="p-3 bg-gray-100 border" placeholder="Product Quantity" type="number" name="productQuantity" id="" />
-                        </div>
-                    </div>
-                    <div className="flex gap-5 w-full">
                         <div className="flex flex-col w-1/2 gap-2">
                             <label className="font-semibold" htmlFor="">Product Image</label>
                             <input className="p-3 bg-gray-100 border" placeholder="Product image URL" type="text" name="productImage" id="" />

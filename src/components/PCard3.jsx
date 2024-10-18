@@ -21,7 +21,7 @@ const PCard3 = ({ card }) => {
             productName, productImage, productPrice
         }
         const { data } = await axiosGeneral.post('/addToCart', cart)
-        console.log(data)
+        // console.log(data)
         if (data.insertedId) {
             toast.success('Product Added to Cart Successfully')
             setTimeout(() => {

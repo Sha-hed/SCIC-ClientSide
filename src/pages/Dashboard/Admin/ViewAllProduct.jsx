@@ -26,7 +26,7 @@ const ViewAllProduct = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const { data } = await axiosGeneral.delete(`/delProduct/${id}`)
-                console.log(data)
+                // console.log(data)
                 if (data.deletedCount) {
                     Swal.fire({
                         title: "Deleted!",

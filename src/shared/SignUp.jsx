@@ -32,11 +32,11 @@ const SignUp = () => {
                     //     progress: undefined,
                     // });
                     navigate('/')
-                    console.log(result)
+                    // console.log(result)
                 }
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
     }
 

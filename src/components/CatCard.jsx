@@ -4,7 +4,7 @@ import ProductCard2 from "./ProductCard2";
 
 const CatCard = ({ data }) => {
     const { _id, products } = data
-    console.log('From CatData page :', data)
+    // console.log('From CatData page :', data)
     return (
         <div className="">
             <div className="flex justify-between py-2">

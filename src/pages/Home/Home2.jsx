@@ -13,7 +13,7 @@ const Home2 = () => {
         }
     })
 
-    console.log('Data coming Check ',categories)
+    // console.log('Data coming Check ',categories)
 
     return (
         <div>

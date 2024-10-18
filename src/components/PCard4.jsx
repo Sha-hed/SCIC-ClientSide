@@ -10,7 +10,7 @@ const PCard4 = () => {
     const axiosGeneral = useAxiosGeneral()
     const product = useLoaderData();
     const { _id, productName, productCategory, productPrice, productImage, productDetails } = product
-    console.log('From Product Details Page!! ', product)
+    // console.log('From Product Details Page!! ', product)
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate()
 
@@ -23,7 +23,7 @@ const PCard4 = () => {
             productName, productImage, productPrice
         }
         const { data } = await axiosGeneral.post('/addToCart', cart)
-        console.log(data)
+        // console.log(data)
         if (data.insertedId) {
             toast.success('Product Added to Cart Successfully')
             setTimeout(() => {

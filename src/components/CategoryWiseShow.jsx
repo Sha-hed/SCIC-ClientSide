@@ -27,7 +27,7 @@ const CategoryWiseShow = () => {
         }
     })
 
-    console.log('Document Count :', pag)
+    // console.log('Document Count :', pag)
 
     const handleSort = (event) => {
         setS(parseInt(event.target.value))
@@ -35,8 +35,8 @@ const CategoryWiseShow = () => {
 
     // For Pagination Concept
     let totalPage = pag;
-    console.log('Total Document Count ', totalPage)
-    let n = Math.ceil(totalPage/4)
+    // console.log('Total Document Count ', totalPage)
+    let n = Math.ceil(totalPage/3)
     const pages = [...Array(n).keys()]
 
     const handlePrev = () => {
@@ -45,8 +45,8 @@ const CategoryWiseShow = () => {
         }
     }
     const handleNext = () => {
-        console.log('page number :', pages)
-        console.log('first page : ', firstPage)
+        // console.log('page number :', pages)
+        // console.log('first page : ', firstPage)
         if (pages.length - 1 > firstPage) {
             setFirstPage(firstPage + 1)
         }

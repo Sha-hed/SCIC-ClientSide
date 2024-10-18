@@ -17,7 +17,7 @@ const Navbar = () => {
 
     const searchRef = useRef()
 
-    console.log('Admin Check ', isAdmin)
+    // console.log('Admin Check ', isAdmin)
     const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
@@ -34,7 +34,7 @@ const Navbar = () => {
         let searched = searchRef.current.value
         navigate('/searchProduct', { state: { searched } })
 
-        console.log('Search Value :', searchRef.current.value)
+        // console.log('Search Value :', searchRef.current.value)
         // console.log(searchText)
     }
 

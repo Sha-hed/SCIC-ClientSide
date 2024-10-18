@@ -21,14 +21,14 @@ const SearchProduct = () => {
             // console.log(data)
             const ll = await data.result1;
             setPag(ll)
-            console.log('Data ashce :', data.result2)
+            // console.log('Data ashce :', data.result2)
             return data.result2
         }
     })
 
     // For Pagination Concept
     let totalPage = pag;
-    console.log('Total Document Count ', totalPage)
+    // console.log('Total Document Count ', totalPage)
     let n = Math.ceil(totalPage / 2)
     const pages = [...Array(n).keys()]
 
@@ -38,8 +38,8 @@ const SearchProduct = () => {
         }
     }
     const handleNext = () => {
-        console.log('page number :', pages)
-        console.log('first page : ', firstPage)
+        // console.log('page number :', pages)
+        // console.log('first page : ', firstPage)
         if (pages.length - 1 > firstPage) {
             setFirstPage(firstPage + 1)
         }
